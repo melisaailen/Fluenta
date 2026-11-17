@@ -873,6 +873,12 @@ mark.wrong.sp{background:color-mix(in srgb,var(--bad) 30%,transparent);text-deco
 .sc-top{gap:18px;align-items:center}.sc-band{font-size:1.15rem}
 .fb-sc{gap:10px}
 .rv .src-box+.row{margin-top:12px}
+@media (max-width:560px){
+ .subnav{width:100%;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:4px;padding:5px;overflow:visible;border-radius:22px;margin-inline:0}
+ .sub-a{padding:10px 6px;font-size:.84rem;white-space:normal;text-align:center;line-height:1.2;display:flex;align-items:center;justify-content:center;border-radius:17px}
+}
+.bl{list-style:disc;display:grid;gap:6px}
+.bl li{padding-left:2px}
 
 </style>
 <div id="app"></div>
@@ -4024,7 +4030,7 @@ function viewEntrevista(id){
 let SIM=null;
 function viewSimulacro(){
  if(!SIM||SIM.stage==='setup'){
-  let lvl='all';const roleInp=h('input',{type:'text',class:'inp',placeholder:'Ej.: HR Generalist, Recruiter, Payroll Analyst','aria-label':'Puesto',autocomplete:'off'});
+  let lvl='all';const roleInp=h('input',{type:'text',class:'inp',placeholder:'Ej.: Recruiter o Payroll Analyst','aria-label':'Puesto',autocomplete:'off'});
   const row=h('div',{class:'chips'});
   const drawL=()=>row.replaceChildren(...['all',...LVLS].map(l=>chip(l==='all'?'Todos los niveles':l,lvl===l,()=>{lvl=l;drawL()})));drawL();
   main.replaceChildren(
@@ -5058,7 +5064,7 @@ function viewFechas(){
  };
  const dIn=h('input',{type:'date',class:'inp','aria-label':'Fecha',value:FD.date}),tIn=h('input',{type:'time',class:'inp','aria-label':'Hora',value:FD.time}),nIn=h('input',{type:'text',class:'inp',inputmode:'decimal','aria-label':'Número o monto',value:FD.num,autocomplete:'off'});
  dIn.addEventListener('input',()=>{FD.date=dIn.value;drawD()});tIn.addEventListener('input',()=>{FD.time=tIn.value;drawT()});
- const lIn=h('input',{type:'text',class:'inp',id:'fd-loc',list:'tz-list','aria-label':'Ciudad o país para la zona horaria',placeholder:'Ej.: Buenos Aires, Madrid, Nueva York',value:FD.loc,autocomplete:'off'}),lList=h('datalist',{id:'tz-list'},TZP.map(e=>h('option',{value:e[3]})));
+ const lIn=h('input',{type:'text',class:'inp',id:'fd-loc',list:'tz-list','aria-label':'Ciudad o país para la zona horaria',placeholder:'Ej.: Madrid o Nueva York',value:FD.loc,autocomplete:'off'}),lList=h('datalist',{id:'tz-list'},TZP.map(e=>h('option',{value:e[3]})));
  lIn.addEventListener('input',()=>{FD.loc=lIn.value;drawZ();drawT()});nIn.addEventListener('input',()=>{FD.num=nIn.value;drawN()});
  const curRow=h('div',{class:'chips'});
  const drawC=()=>curRow.replaceChildren(...[['ars','Pesos'],['usd','Dólares'],['eur','Euros']].map(([k,n])=>chip(n,FD.cur===k,()=>{FD.cur=FD.cur===k?null:k;drawC();drawN()})));
