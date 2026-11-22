@@ -881,6 +881,32 @@ mark.wrong.sp{background:color-mix(in srgb,var(--bad) 30%,transparent);text-deco
 .bl{list-style:disc;display:grid;gap:6px}
 .bl li{padding-left:2px}
 
+/* ---------- ajuste fino para celulares y pantallas táctiles ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-height:100dvh}
+button,a,.chip,.nav-a,.sub-a,.icon-btn,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (pointer:coarse),(max-width:640px){
+ .chip,.chip[class*="lcf-"],.sug-lv .chip{min-height:40px;padding-top:8px;padding-bottom:8px}
+ .chips.grid .chip,.fpanel .chips.grid .chip{min-height:44px}
+ .icon-btn,.ex .icon-btn,.exl .icon-btn,.fb .icon-btn,.wotd .icon-btn{width:40px;height:40px;border-radius:12px}
+ .lnk.back{display:inline-flex;align-items:center;min-height:40px}
+ .btn.sm{min-height:40px}
+ .lcard .l-cat,.lcard .l-num,.lhero .l-num,.l-top .l-num{font-size:.75rem}
+}
+@media (max-width:640px){
+ /* en columnas angostas el texto justificado deja huecos y corta palabras: se alinea a la izquierda */
+ .lead,.p,.l-goal,.note,.note>span,.lh-box p,.banner p,.path-can li span,.tile .muted,.today>p,.card>p.muted,.phead .lead,.fb>div:not(.row){text-align:left;hyphens:manual;-webkit-hyphens:manual}
+ .tr-in{min-height:150px;height:150px}
+ .mail,.src-box{font-size:1rem}
+}
+@media (max-height:480px) and (orientation:landscape){
+ .topbar{position:static}
+}
+@media (pointer:coarse),(max-width:640px){
+ /* con menos de 16 px, Safari en iPhone hace zoom al tocar un campo */
+ input:not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select,.ta,.inp,.mail-ed{font-size:16px}
+}
+
 </style>
 <div id="app"></div>
 <script>
