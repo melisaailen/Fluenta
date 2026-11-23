@@ -1203,6 +1203,19 @@ body{overflow-x:clip}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sg-sun{opacity:.16}}
 .av-media{background:#CFE5C0}
 
+/* margen para que las tarjetas puedan crecer sin cortarse ni pisarse */
+.band .sugg{gap:clamp(22px,2.8vw,40px);padding-inline:clamp(10px,2.6vw,44px)}
+@media (hover:hover) and (min-width:821px){
+ .band .sugg>.today:nth-child(1):hover{transform:rotateY(5deg) scale(1.03)}
+ .band .sugg>.today:nth-child(2):hover{transform:scale(1.05)}
+ .band .sugg>.today:nth-child(3):hover{transform:rotateY(-5deg) scale(1.03)}
+}
+
+/* sombra de las ilustraciones vectoriales */
+:root{--sil-sh:rgba(31,77,63,.34)}
+:root[data-theme="dark"]{--sil-sh:rgba(0,0,0,.55)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sil-sh:rgba(0,0,0,.55)}}
+
 </style>
 <div id="app"></div>
 <script>
@@ -4454,6 +4467,7 @@ function usaArt(){
  for(let i=1;i<=12;i++){const y=(fy+fh*i/13).toFixed(1),x0=y<fy+ch-1?fx+cw:fx;ln+=`M${x0} ${y}H${fx+fw}`}
  return `<svg viewBox="0 0 520 560" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
   <rect x="-1500" y="-900" width="3520" height="1500" fill="#CFE5C0"/>
+  <defs><filter id="usash" x="-10%" y="-6%" width="125%" height="120%"><feDropShadow dx="0" dy="7" stdDeviation="4.5" flood-color="#1F4D3F" flood-opacity=".3"/></filter></defs><g filter="url(#usash)">
   <g fill="none" stroke="${D}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
    <path d="M40 526H480"/>
    <rect x="72" y="504" width="56" height="22"/>
@@ -4468,14 +4482,14 @@ function usaArt(){
    <text x="262" y="392" font-size="25" opacity=".85">Inglés · Anglais</text>
    <text x="262" y="428" font-size="25" opacity=".85">Englisch · Inglese</text>
    <text x="262" y="464" font-size="25" opacity=".85">Inglês · Английский</text>
-  </g>
+  </g></g>
  </svg>`;
 }
 /* horizonte de Nueva York en línea */
 function skylineArt(){
  const B=[[0,52,30],[34,84,26],[64,60,34],[102,96,28],[134,70,30],[168,112,28],[200,76,32],[236,56,26],[266,100,30],[300,70,26],[420,84,28],[452,64,34],[490,104,26],[520,76,30],[554,92,28],[586,60,32],[622,110,26],[652,72,30],[686,88,34]];
  let b='';B.forEach(([x,hh,w])=>{b+=`M${x} 188V${188-hh}H${x+w}V188`});
- return `<svg viewBox="0 0 720 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect width="720" height="190" fill="#F2DE7A"/><g fill="none" stroke="#1F4D3F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="236" cy="44" r="26"/><path d="${b}"/><path d="M334 188V122H348V102H356V84H362V62L364.5 38L367 62V84H373V102H381V122H395V188"/><path d="M-4 188H724"/></g></svg>`;
+ return `<svg viewBox="0 0 720 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><defs><filter id="skysh" x="-3%" y="-10%" width="106%" height="125%"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#1F4D3F" flood-opacity=".32"/></filter></defs><rect width="720" height="190" fill="#F2DE7A"/><g filter="url(#skysh)" fill="none" stroke="#1F4D3F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="236" cy="44" r="26"/><path d="${b}"/><path d="M334 188V122H348V102H356V84H362V62L364.5 38L367 62V84H373V102H381V122H395V188"/><path d="M-4 188H724"/></g></svg>`;
 }
 /* un solo ícono de línea por tarjeta (640×230) */
 function sgArt(k){
@@ -4488,7 +4502,7 @@ function sgArt(k){
  } else {
   g=`<rect x="288" y="30" width="64" height="112" rx="32"/><path d="M298 72H342M298 88H342M298 104H342"/><path d="M262 96V112A58 58 0 0 0 378 112V96"/><path d="M320 170V204M276 206H364"/>`;
  }
- return `<svg viewBox="0 0 640 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${base}<g transform="translate(0 -4)" fill="none" stroke="var(--sil)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
+ return `<svg viewBox="0 0 640 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><filter id="sgsh" x="-12%" y="-12%" width="124%" height="135%"><feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#1F4D3F" flood-opacity="1" style="flood-color:var(--sil-sh,rgba(31,77,63,.34))"/></filter></defs>${base}<g filter="url(#sgsh)" transform="translate(0 -4)" fill="none" stroke="var(--sil)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">${g}</g></svg>`;
 }
 /* carrusel de sugerencias: las flechas rotan el orden y la tarjeta del medio queda al frente */
 function sgCarousel(...cards){
